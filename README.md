@@ -12,11 +12,11 @@ const component = require('ai-component');
 
 ## Documentation
 
-- create
-- install
-- uninstall
-- bundle
-- unbundle
+- `create` component
+- `install` component and dependencies
+- `uninstall` component and dependencies 
+- `bundle` component dependencies with app
+- `unbundle` component dependencies from app
 
 ## CLI
 
@@ -34,7 +34,7 @@ Install named component at location (or use default location). Install from repo
 
 - `aic install <names>`
 - `aic install <repo>/<name>`
-- `aic install <repo>/<name> <location>`
+- `aic install <repo>/<name> [location]`
 
 ## uninstall component(s)
 
