@@ -18,6 +18,42 @@ const component = require('ai-component');
 - bundle
 - unbundle
 
+## CLI
+
+### create component
+
+Create named component at location (or use default location), using basic or custom layout (skeleton). 
+
+- `aic create <name>`
+- `aic create <name> [location]`
+- `aic create <name> [location] [layout]`
+
+## install component(s)
+
+Install named component at location (or use default location). Install from repo or default repo. 
+
+- `aic install <names>`
+- `aic install <repo>/<name>`
+- `aic install <repo>/<name> <location>`
+
+## uninstall component(s)
+
+Install named component at location (or use default location). Install from repo or default repo. 
+
+- `aic uninstall <names>`
+
+## bundle component(s)
+
+Bundle named component(s) 
+
+- `aic bundle <names>`
+
+## unbundle component(s)
+
+Unbundle named component(s) 
+
+- `aic unbundle <names>`
+
 ## Contributing
 
 Please submit all issues and pull requests to the [kristianmandrup/ai-component](https://github.com/kristianmandrup/ai-component) repository!
