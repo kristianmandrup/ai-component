@@ -36,11 +36,38 @@ Install named component at location (or use default location). Install from repo
 - `aic install <repo>/<name>`
 - `aic install <repo>/<name> [location]`
 
+The install command will use the `Downloader` to clone (download) the component 
+from a remote git repo. You can either specify the full repo URL or use a git protocol shorthand. 
+Currently `github`, `gitlab` and `bitbucket` protocol shorthands are supported.
+
+- `aic install https://bitbucket.org/my-account/my-component.git`
+- `aic install bitbucket:my-account/my-component` (using protocol shorthand)
+
+You can also set up preferences in your `installer.json` file to set defaults for 
+protocol shorthand and remote git account. This will allow the simpler forms:
+
+- `aic install my-account/my-component` (use default protocol shorthand)
+- `aic install my-component` (use default git account)
+
+The installer will first check if a component of that name is already registered in your component registry for the project (`components` section of `installer.json`). 
+If such a registry entry exists, it will currently abort installation.
+
+The installer will by default install into your preconfigured destination path for components (also set in `installer.json`) 
+or `src/components` if not set. The destination folder will be the name of the git repo.
+By default, `aic install my-account/my-component` will be cloned into `src/components/my-component`.
+If a folder of that name already exists, it will currently abort registration (in the future it will ask to overwrite and allow you to 
+set `autoOverride` setting or even name the registration entry yourself).
+
+If all goes well, it will then proceed to bundle the component if `autoBundle` is set to true. 
+
 ## uninstall component(s)
 
 Install named component at location (or use default location). Install from repo or default repo. 
 
 - `aic uninstall <names>`
+
+Will look up each of the names in the components registry (in `installer.json`). For each one found, it will remove the 
+component folder pointed to and then unbundle the component as well if `autoBundle` is set to true.
 
 ## bundle component(s)
 
