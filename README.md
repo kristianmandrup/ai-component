@@ -134,6 +134,46 @@ relevant dependencies, including css files, typings etc. without you having to m
 
 Benefits: Huge reduction of complexity, trial and error and most of all frustration and time!!! 
 
+### loading resources
+
+Currently Aurelia uses two different models for loading external resources.
+
+For webpack, you simply load the resources in your `.js` files such as `import 'bootstrap/dist/bootstrap.css';`. 
+These resources will be detected during app bundling and the the appropriate loader will bundled the resources with the app.
+
+If you don't use webpack, you must use the special `<require from="bootstrap/dist/bootstrap.css">` element to indicate which resources are to be bundled.
+
+As we can see, the references are identical, only the method differs. Why must we manage this ourselves?
+The component should list the resource locations to be loaded/inclued and when it is installed it should 
+generate and insert the relevant `import` or `<require>` depending on the project preferences (ie. using webpack or not).
+
+The `install.json` config file should thus include entries for resources which are to be auto-inserted in `index.js` or `index.html` or wherever `"main"` points to.
+
+```json
+"main": "contact",
+"resources": [
+  "kendo-ui/styles/web/css/kendo.materialblack.min.css"
+]
+```
+
+Ideally we should register aliases, like: `"css:kendo-ui:materialblack.min.css"` and in a structured format:
+
+```json
+"resources": [
+  {
+    "css": {
+      "kendo-ui": [
+        "materialblack.min.css"
+      ],
+      "bootstrap": [
+      ]      
+    },
+    "fonts": {      
+    }
+  }
+]
+```
+
 ## unbundle component(s)
 
 Unbundle named component(s) 
