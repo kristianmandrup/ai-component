@@ -92,7 +92,11 @@ Sub-component are registered in the `install.json` file like a regular `installe
   },
   "components": {
     "contact-detail": {
-      "location": "./contact-detail",
+      "filePath": "./contact-detail",
+      "bundled": false
+    },
+    "contact-form": {
+      "remoteURL": "github:aurelia-components/contact-form#latest",
       "bundled": false
     }
   }
