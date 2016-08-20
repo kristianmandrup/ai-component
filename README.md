@@ -28,6 +28,9 @@ Create named component at location (or use default location), using basic or cus
 - `aic create <name> [location]`
 - `aic create <name> [location] [layout]`
 
+Creates a new component at the location specified (or uses the default component location `src/components`). 
+In the future we might support specifying a layout (skeleton) for the component files to be generated. 
+
 ## install component(s)
 
 Install named component at location (or use default location). Install from repo or default repo. 
@@ -53,12 +56,13 @@ The installer will first check if a component of that name is already registered
 If such a registry entry exists, it will currently abort installation.
 
 The installer will by default install into your preconfigured destination path for components (also set in `installer.json`) 
-or `src/components` if not set. The destination folder will be the name of the git repo.
-By default, `aic install my-account/my-component` will be cloned into `src/components/my-component`.
+or `src/components` if not set. The destination folder will by default be the name of the git repo.
+So by default, `aic install my-account/my-component` will be cloned into `src/components/my-component`.
+
 If a folder of that name already exists, it will currently abort registration (in the future it will ask to overwrite and allow you to 
 set `autoOverride` setting or even name the registration entry yourself).
 
-If all goes well, it will then proceed to bundle the component if `autoBundle` is set to true. 
+If all goes well and any conflicts are resolved, the installer will proceed to bundle the component if `autoBundle` is set to true. 
 
 ## uninstall component(s)
 
@@ -66,8 +70,8 @@ Install named component at location (or use default location). Install from repo
 
 - `aic uninstall <names>`
 
-Will look up each of the names in the components registry (in `installer.json`). For each one found, it will remove the 
-component folder pointed to and then unbundle the component as well if `autoBundle` is set to true.
+Look up each of the component names in the components registry (in `installer.json`). For each match, it will remove the 
+component folder pointed to (via `location`). It will then unbundle the component as well if `autoBundle` is set to true.
 
 ## bundle component(s)
 
@@ -75,11 +79,42 @@ Bundle named component(s)
 
 - `aic bundle <names>`
 
+Look up each of the component names in the components registry. For each match it will consult the `install.json` file in the 
+installation folder of that component. If the component is composed of other components it will walk the sub-components as 
+well and bundle each one (that has not previously been bundled). 
+
+Sub-component are registered in the `install.json` file like a regular `installer.json`.
+
+```json
+{
+  "dependencies": {
+    //...
+  },
+  "components": {
+    "contact-detail": {
+      "location": "./contact-detail",
+      "bundled": false
+    }
+  }
+}
+```
+
+Notice that sub-components have their own `bundled` marker. Thus the application only knows the bundle status of top-level components, 
+whereas each component manages its own registry of child components. 
+If the bundle configuration of a child component is changed, you can force bundle it directly via:
+`aic bundle .` which will consult the `install.json` of the current folder and bundle that component and any unbundled child components.
+
+Notice that applications are considered components themselves. Apps can even contain sub-apps that are child components!
+The setting `autoBundle` can be configured on the child component level if needed, to override the project level setting from `installer.json`.
+
 ## unbundle component(s)
 
 Unbundle named component(s) 
 
 - `aic unbundle <names>`
+
+Unbundles the component and all child components by consulting `installer.json` components registry and 
+each sub-registry components iteratively...
 
 ## Contributing
 
