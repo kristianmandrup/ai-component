@@ -30,7 +30,21 @@ Create named component at location (or use default location), using basic or cus
 - `aic create <name> [location] [layout]`
 
 Creates a new component at the location specified (or uses the default component location `src/components`). 
-In the future we might support specifying a layout (skeleton) for the component files to be generated. 
+You can specify a layout (skeleton) for the component files to be generated. 
+
+Currently there is a `simple` layout only:
+
+```
+/contact
+  index.html - optional main View
+  index.js - main View Model
+  section.js - optional child router
+  install.json - config file
+  package.json - meta data and lib dependencies
+  Readme.md - description
+```  
+
+The `index.html` and `section.js` are optional. 
 
 ## install component(s)
 
@@ -89,7 +103,6 @@ Sub-component are registered in the `install.json` file like a regular `installe
 ```json
 {
   "dependencies": {
-    //...
   },
   "components": {
     "contact-detail": {
