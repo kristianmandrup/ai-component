@@ -118,6 +118,11 @@ Bundling consists of:
 - install typings
 - mark component entry as bundled
 
+This ensures that once you install and bundle a component, the application will be updated with all the 
+relevant dependencies, including css files, typings etc. without you having to manage all this mess yourself each time!
+
+Benefits: Huge reduction of complexity, trial and error and most of all frustration and time!!! 
+
 ## unbundle component(s)
 
 Unbundle named component(s) 
