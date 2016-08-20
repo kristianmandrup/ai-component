@@ -104,8 +104,19 @@ whereas each component manages its own registry of child components.
 If the bundle configuration of a child component is changed, you can force bundle it directly via:
 `aic bundle .` which will consult the `install.json` of the current folder and bundle that component and any unbundled child components.
 
-Notice that applications are considered components themselves. Apps can even contain sub-apps that are child components!
+Applications are considered components themselves. Apps can even contain sub-apps that are child components!
 The setting `autoBundle` can be configured on the child component level if needed, to override the project level setting from `installer.json`.
+
+Bundling consists of:
+- updating `aurelia.json` config file with:
+  - add dependencies to vendor (and other) bundles
+  - add extra typing sources
+  - ... 
+
+- add to and install `package.json` dependencies
+- install plugins
+- install typings
+- mark component entry as bundled
 
 ## unbundle component(s)
 
@@ -114,7 +125,7 @@ Unbundle named component(s)
 - `aic unbundle <names>`
 
 Unbundles the component and all child components by consulting `installer.json` components registry and 
-each sub-registry components iteratively...
+each sub-registry components iteratively and unbundling each.
 
 ## Contributing
 
