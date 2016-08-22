@@ -11,7 +11,7 @@ Create named component at location (or use default location), using basic or cus
 Creates a new component at the location specified (or uses the default component location `src/components`). 
 You can specify a layout (skeleton) for the component files to be generated. 
 
-Currently there is a `simple` layout only:
+Currently only a `simple` layout is included:
 
 ```
 /contact
@@ -24,6 +24,95 @@ Currently there is a `simple` layout only:
 ```  
 
 The `index.html` and `section.js` are optional.
+
+You can however now create your own custom component templating:
+
+### Custom component templating
+
+Define and export environment variable AI_HOME to point to a path: 
+
+`export AI_HOME="/Users/<user name>/ai"`
+
+```
+/ai
+  /component
+    /templates
+```
+
+Under `/templates` create a folder with the name of your layout, such as `my-custom` and add:
+- `/component` folder with files/templates for component
+- `template.js` which manages template generation
+- `questions.js` which controls which questions are asked (data to be collected) before generation
+
+All files under `/component` will be treates as EJS templates. All will have access to  
+the data collected from `qustions.js`
+
+```
+  ...
+    /templates
+      /my-custom
+        /component
+        template.js
+        questions.js
+```
+
+Note, that each `.js` file will execute in a "sandbox" and only have the following available:
+`{filesIn: filesIn, _: _, path: path}` where `_` is lodash.
+
+Sample `template.js`
+
+```js
+// skip index.html if hasView is not chosen from questions
+// skip section.js if hasRouter is not chosen from questions
+function filter(ctx) {
+  let filteredFiles = [];
+  if (ctx.hasView) filteredFiles.push('index.html');
+  if (ctx.hasRouter) filteredFiles.push('section.js');
+  return filteredFiles;
+}
+
+// filter template paths using filter function (above)
+function paths(ctx, files) {
+  let filterFiles = filter(ctx);
+  return _.reject(files, (file) => { 
+    return filterFiles.indexOf(file) >= 0;
+  });
+}
+
+// rename any .js files to the preferred extension available in ctx
+// replace any first '_' character to '.', needed for .gitignore file f.ex 
+function rename(fileName, ctx) {
+  let templateExt = path.extname(fileName);
+  let ext = path.extname(fileName) === 'js' ? ctx.ext : templateExt;
+  let name = path.basename(fileName, templateExt).replace(/^_/, '.');
+  let res = [name, ext].join('');
+  return res;
+}
+
+module.exports = {
+  paths: paths,
+  rename: rename
+} 
+```
+
+The `questions.js` should export an array with questions to collect data to pass to each template.
+
+Sample `questions.js`
+
+```js
+module.exports = [{
+  name: 'hasView',
+  message: 'Is it a view component?',
+  type: 'confirm',
+  default: true
+}, {
+  ...
+}];
+```
+
+This way you can create component generators for using 
+your preferred ORM, Form and UI layout frameworks!! 
+Then share with the community or within your team/organisation :)
 
 ## Architecture
 
