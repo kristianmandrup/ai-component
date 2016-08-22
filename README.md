@@ -102,6 +102,12 @@ Sub-component are registered in the `install.json` file like a regular `installe
 
 ```json
 {
+  "name": "contact",
+  "version": "0.1.0",
+  "type": "component",
+  "targets": [
+    "aurelia"
+  ],
   "dependencies": {
   },
   "components": {
@@ -116,6 +122,8 @@ Sub-component are registered in the `install.json` file like a regular `installe
   }
 }
 ```
+
+The `targets` show which install targets this component supports.
 
 Notice that sub-components have their own `bundled` marker. Thus the application only knows the bundle status of top-level components, 
 whereas each component manages its own registry of child components. 
