@@ -57,7 +57,7 @@ the data collected from `qustions.js`
 ```
 
 Note, that each `.js` file will execute in a "sandbox" and only have the following available:
-`{filesIn: filesIn, _: _, path: path}` where `_` is lodash.
+`{_: _}` where `_` is [lodash](lodash.com) + node `path`.
 
 Sample `template.js`
 
@@ -82,11 +82,10 @@ function paths(ctx, files) {
 // rename any .js files to the preferred extension available in ctx
 // replace any first '_' character to '.', needed for .gitignore file f.ex 
 function rename(fileName, ctx) {
-  let templateExt = path.extname(fileName);
-  let ext = path.extname(fileName) === 'js' ? ctx.ext : templateExt;
-  let name = path.basename(fileName, templateExt).replace(/^_/, '.');
-  let res = [name, ext].join('');
-  return res;
+  let templateExt = _.path.extname(fileName);
+  let ext = _.path.extname(fileName) === 'js' ? ctx.ext : templateExt;
+  let name = _.path.basename(fileName, templateExt).replace(/^_/, '.');
+  return [name, ext].join('');
 }
 
 module.exports = {
