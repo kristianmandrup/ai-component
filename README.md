@@ -109,6 +109,10 @@ Sub-component are registered in the `install.json` file like a regular `installe
     "aurelia"
   ],
   "dependencies": {
+    
+  },
+  "prepends": {
+    
   },
   "components": {
     "contact-detail": {
