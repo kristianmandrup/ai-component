@@ -5,15 +5,12 @@
  * Copyright (c) 2016, Kristian Mandrup
  * Licensed under the MIT license.
  */
-
-'use strict';
-
-var chai = require('chai'),
+const chai = require('chai'),
     expect = chai.expect;
-
 chai.should();
 
-var aic = require('../lib/ai-component.js');
+require('./project-files');
+const aic = require('../lib/ai-component.js');
 
 describe('ai-component module', function() {
     describe('#awesome()', function() {

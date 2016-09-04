@@ -5,6 +5,8 @@ var chai = require('chai'),
 
 chai.should();
 
+require('../../project-files');
+
 const One = require('../../../lib/bundler/bundle/one.js');
 const name = 'contacts';
 
