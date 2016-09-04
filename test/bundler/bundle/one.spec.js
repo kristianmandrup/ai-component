@@ -8,6 +8,9 @@ chai.should();
 const One = require('../../../lib/bundler/bundle/one.js');
 const name = 'contacts';
 
+Registry = class {
+}
+
 describe('bundle', () => {
   describe('One', () => {
       describe('#create()', () => {
