@@ -49,27 +49,31 @@ The `targets` show which install targets this component supports.
 
 Notice that sub-components have their own `bundled` marker. Thus the application only knows the bundle status of top-level components, 
 whereas each component manages its own registry of child components. 
+
 If the bundle configuration of a child component is changed, you can force bundle it directly via:
 `aic bundle .` which will consult the `install.json` of the current folder and bundle that component and any unbundled child components.
+
 A sub component can either be local via `filePath` or remote via `remoteURL`. When a component bundles its sub-components, those that are 
 remote are first installed (by cloning) and then configured/bundled as usual. Each component that is cloned can be updated and managed 
 individually by `git pull` and such, to faciliate multiple developers working on separate components!
 
-In the (near) future we will set up a server where components can be registered much like npm modules, and where the components
+In the (near) future we will set up an Artefact server where components can be registered much like npm modules, and where the components
 can be public or private.
 
 Applications are considered components themselves. Apps can even contain sub-apps that are child components!
 The setting `autoBundle` can be configured on the child component level if needed, to override the project level setting from `installer.json`.
 
 Bundling consists of:
-- updating `aurelia.json` config file with:
-  - add dependencies to vendor (and other) bundles
+- add to and install `package.json` dependencies
+- install plugins
+- install vendor libs
+- install typings
+
+- updating `aurelia.json` config file:
+  - add `dependencies` and `prepend` to vendor (and other) bundles
   - add extra typing sources
   - ... 
 
-- add to and install `package.json` dependencies
-- install plugins
-- install typings
 - mark component entry as bundled
 
 This ensures that once you install and bundle a component, the application will be updated with all the 
