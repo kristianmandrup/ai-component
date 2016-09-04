@@ -130,3 +130,97 @@ Unbundle named component(s)
 Unbundles the component and all child components by consulting `installer.json` components registry and 
 each sub-registry components iteratively and unbundling each.
 
+## Architecture
+
+The `bundler/index` file exports the main `bundle` and `unbundle` factory methods.
+
+### Bundle
+
+The `Bundle` class has the main function `bundle(name)` which can bundle: 
+- a single component by name
+- a list of components by name
+- all components if no name
+
+For each component to bundle, it will call `bundleOne(name)` which create and run an instance of `One` 
+to `bundle` a single component.
+
+### One
+
+One will find the registered location of the component from the components registry in `installer.json` file of the project.
+If the component folder exists, it will then instantiate `Configurer` to configure the component.
+
+### Configurer 
+  
+The Configurer will iterate each of 
+- `aureliaConfig` - install `dependencies` and `prepend` of `vendor-libs.js` bundle
+- `packages` - merge package dependencies
+- `typings` - install registered typings and custom `.d.ts` sources
+- `bundles` - install registered library bundle entries under `bundles`
+- `childComponents` - install child components under `components`
+
+The Configurer has a factory method for each of these, which will be called to create an installer. 
+It will call `install` on each such installer, passing the component configuration from `install.json` 
+of the component folder.
+
+Sample `install.json` file
+
+```json
+{
+  "bundles": [
+    "foundation"
+  ],
+  "dependencies": [
+    "jquery",
+    {
+      "name": "bootstrap",
+      "path": "../node_modules/bootstrap/dist",
+      "main": "js/bootstrap.min",
+      "deps": ["jquery"],
+      "exports": "$",
+      "resources": [
+        "css/bootstrap.css"
+      ]
+    }
+  ],
+  "typings": [
+    "nprogress"
+  ]
+}
+```
+
+Note that `bundles/base` configures `bundler` to be an instance of `VendorLibraryBundler` from `ai-lib` so 
+as to bundle `bundles` via that registry.   
+
+### TODO
+Add support for:
+- `plugins`
+- `addons`
+- `apps`
+- `libs`
+
+The `bundles` seem to be confusing name. Make it clear it is preregistered `dependencies` for `vendor-libs.js`, 
+ie. instead of adding `bootstrap` like:
+
+```json
+  "dependencies": [
+    "jquery",
+    {
+      "name": "bootstrap",
+      "path": "../node_modules/bootstrap/dist",
+      "main": "js/bootstrap.min",
+      "deps": ["jquery"],
+      "exports": "$",
+      "resources": [
+        "css/bootstrap.css"
+      ]
+    }
+  ],
+```  
+
+We can do:
+
+```json
+  "bundles": [
+    "bootstrap"
+  ],
+```
