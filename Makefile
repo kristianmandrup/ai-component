@@ -6,6 +6,6 @@
 
 test:
 
-	@NODE_ENV=test ./node_modules/mocha/bin/mocha -R spec --ui bdd --colors --recursive -t 8000 ./test/*.spec.js
+	@NODE_ENV=test ./node_modules/mocha/bin/mocha -t 8000
 
 .PHONY: test

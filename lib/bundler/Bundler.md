@@ -188,8 +188,8 @@ Sample `install.json` file
 }
 ```
 
-Note that `bundles/base` configures `bundler` to be an instance of `VendorLibraryBundler` from `ai-lib` so 
-as to bundle `bundles` via that registry.   
+Note that `bundles/base` configures `bundler` to be an instance of `VendorLibraryBundler` from `ai-lib`. 
+This bundler bundles via the vendor libs bundle registry.   
 
 ### TODO
 Add support for:
@@ -198,7 +198,8 @@ Add support for:
 - `apps`
 - `libs`
 
-The `bundles` seem to be confusing name. Make it clear it is preregistered `dependencies` for `vendor-libs.js`, 
+For `libs` we simply install and configure the latest version of that library. Libs from `package.json` are version specific.
+The `bundles` entry is a somewhat confusing name!? Make it clear it is preregistered `dependencies` for `vendor-libs.js`, 
 ie. instead of adding `bootstrap` like:
 
 ```json
