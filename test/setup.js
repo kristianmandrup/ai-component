@@ -8,5 +8,5 @@ chai.use(chaiCatch);
 require('./project-files');
 
 global.mocks = {
-  installerConfig: require('./configs/installer')
+  configs: require('./configs')
 }
