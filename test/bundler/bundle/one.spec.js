@@ -1,13 +1,10 @@
 'use strict';
 
-var chai = require('chai'),
-    expect = chai.expect;
+require('../../setup');
 
-chai.should();
+const { log } = require('../../utils'); 
 
-require('../../project-files');
-
-const One = require('../../../lib/bundler/bundle/one.js');
+const One = require('../../../lib/bundler/bundle/one').clazz;
 const name = 'contacts';
 
 describe('bundle', () => {
