@@ -111,7 +111,7 @@ Sub-component are registered in the `install.json` file like a regular `installe
   "dependencies": {
     
   },
-  "prepends": {
+  "prepend": {
     
   },
   "components": {
