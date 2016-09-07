@@ -19,7 +19,7 @@ describe('bundle', () => {
     new Install(config, filePath).run();
   })
 
-  describe('packages - uninstall', () => {
+  describe('Packages - uninstall', () => {
     const uninstall = new UnInstall(config, filePath);
 
     describe('constructor', () => {

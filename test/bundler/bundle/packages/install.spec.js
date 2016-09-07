@@ -15,7 +15,7 @@ const targetPath = './package.json';
 const projectDeps = require('./helper');
 
 describe('bundle', () => {
-  describe('Configurer', () => {
+  describe('Packages - install', () => {
     const install = new Install(config, filePath);
 
     describe('constructor', () => {
