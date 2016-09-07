@@ -5,17 +5,15 @@
  * Copyright (c) 2016, Kristian Mandrup
  * Licensed under the MIT license.
  */
-const chai = require('chai'),
-    expect = chai.expect;
-chai.should();
+require('./setup');
+const { Registry } = require('ai-core');
 
-require('./project-files');
-const aic = require('../lib/ai-component.js');
+const aic = require('../lib/index.js');
 
-describe('ai-component module', function() {
-    describe('#awesome()', function() {
-        it('should return a hello', function() {
-            // expect(ai-component.awesome('livia')).to.equal('hello livia');
-        });
-    });
+describe('ai-component', () => {
+  describe('dummy registry', () => {
+    it('should have a dummy test registry', () => {
+        expect(new Registry().config.name).to.equal('my-dummy-project');
+    })        
+  })
 });

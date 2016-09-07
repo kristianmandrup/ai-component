@@ -10,15 +10,12 @@ require('../../project-files');
 const One = require('../../../lib/bundler/bundle/one.js');
 const name = 'contacts';
 
-Registry = class {
-}
-
 describe('bundle', () => {
   describe('One', () => {
-      describe('#create()', () => {
+      describe('constructor', () => {
           const one = new One(name);
 
-          it('should return a hello', () => {
+          it('should set name', () => {
               expect(one.name).to.equal(name);
           });
       });

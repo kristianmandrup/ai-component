@@ -6,6 +6,6 @@
 
 test:
 
-	@NODE_ENV=test ./node_modules/mocha/bin/mocha -t 8000
+	@./node_modules/mocha/bin/mocha -t 2000
 
 .PHONY: test
