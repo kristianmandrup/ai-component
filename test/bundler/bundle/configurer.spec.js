@@ -6,16 +6,16 @@ const { log } = require('../../utils');
 
 const Configurer = require('../../../lib/bundler/bundle/configurer').clazz;
 const configs = require('../../configs');
-const name = 'contact'
-const filePath = undefined
-const installConfigPath = undefined
+const name = 'contact';
+const filePath = undefined;
+const installConfigPath = undefined;
 const config = configs.components.contact.config;
 
 describe('bundle', () => {
   describe('Configurer', () => {
-    describe('constructor', () => {
-      const configurer = new Configurer(name);
+    const configurer = new Configurer(name);
 
+    describe('constructor', () => {
       it('should set name', () => {
           expect(configurer.name).to.equal(name);
       });
@@ -33,5 +33,14 @@ describe('bundle', () => {
       });
       
     });
+
+    // describe('configure', () => {
+    //   configurer.configure();
+
+    //   it('should set component registry entry to be bundled', () => {
+    //       expect(configurer.componentRegistry.isBundled(name)).to.be(true);
+    //   });
+    // });
+    
   });
 });
