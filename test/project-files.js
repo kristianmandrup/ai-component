@@ -3,8 +3,10 @@ const configs = require('./configs');
 
 const mockedFiles = {
   './installer.json': JSON.stringify(configs.project),
+  './package.json': JSON.stringify(configs.package),
   './aurelia_project/aurelia.json': JSON.stringify(configs.aurelia),
-  './src/component/contact/install.json': JSON.stringify(configs.components.contact) 
+  'src/components/contact/install.json': JSON.stringify(configs.components.contact.config), 
+  'src/components/contact/package.json': JSON.stringify(configs.components.contact.package)
 }
 
 function mockFiles() {

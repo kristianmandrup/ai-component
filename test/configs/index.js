@@ -1,5 +1,6 @@
 module.exports = {
-  project: require('./installer.json'),
-  aurelia: require('./aurelia.json'),
+  project: require('./installer'),
+  package: require('./pack'),
+  aurelia: require('./aurelia'),
   components: require('./components')
 }

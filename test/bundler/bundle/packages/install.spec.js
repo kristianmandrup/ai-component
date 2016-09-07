@@ -33,5 +33,21 @@ describe('bundle', () => {
           expect(install.targetPath).to.equal(targetPath);
       });
     });   
+
+    describe('install', () => {
+        const installed = install.install();
+        const mockedPack = global.mockedFiles['./package.json']
+
+        let project = {
+            package: JSON.parse(mockedPack)
+        }
+
+        // console.log('updated project package', mockedPack);
+        // log(project.package);
+
+        it('should merge component package dependencies with project dependencies', () => {
+            expect(project.package.dependencies.bootstrap).to.equal("^3.3.7");
+        });    
+    });
   });
 });  

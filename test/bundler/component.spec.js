@@ -47,7 +47,6 @@ describe('bundler', () => {
 
     describe('#expandedDependencies', () => {
       const deps = component.expandedDependencies;
-      log(component.expandedDependencies);
 
       it('should return expanded bundle dependencies combined with dependencies list from install.json config', () => {
         expect(deps.length).to.equal(4);
@@ -60,7 +59,6 @@ describe('bundler', () => {
 
     describe('#uniqueDependencies', () => {
       const deps = component.uniqueDependencies;
-      log(deps);
 
       it('should return combined dependencies without duplicate bootstrap', () => {
         expect(deps.length).to.equal(3);

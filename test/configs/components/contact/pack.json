@@ -1,0 +1,11 @@
+{
+  "name": "contact",
+  "keywords": [
+    "aurelia-component",
+    "contacts"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "jquery": "^2.2.4"
+  }
+}
