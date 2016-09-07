@@ -20,7 +20,7 @@
       "url": "https://github.com/kristianmandrup/ai-component/blob/master/LICENSE"
     }
   ],
-  "main": "lib/ai-component",
+  "main": "lib/index",
   "bin": {
     "aic": "bin/aic.js"
   },
