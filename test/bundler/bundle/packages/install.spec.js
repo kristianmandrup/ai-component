@@ -12,6 +12,8 @@ const filePath = './src/components/contact'
 const srcPath = 'src/components/contact/package.json'
 const targetPath = './package.json';
 
+const projectDeps = require('./helper');
+
 describe('bundle', () => {
   describe('Configurer', () => {
     const install = new Install(config, filePath);
@@ -35,18 +37,14 @@ describe('bundle', () => {
     });   
 
     describe('install', () => {
-        const installed = install.install();
-        const mockedPack = global.mockedFiles['./package.json']
-
-        let project = {
-            package: JSON.parse(mockedPack)
-        }
+        const installed = install.run();
+        const deps = projectDeps();
 
         // console.log('updated project package', mockedPack);
         // log(project.package);
 
         it('should merge component package dependencies with project dependencies', () => {
-            expect(project.package.dependencies.bootstrap).to.equal("^3.3.7");
+            expect(deps.bootstrap).to.equal("^3.3.7");
         });    
     });
   });
