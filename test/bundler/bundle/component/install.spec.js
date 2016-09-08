@@ -5,22 +5,21 @@ require('../../../setup');
 
 const { log } = require('../../../utils'); 
 
-const ComponentConfig = require('../../../../lib/bundler/component');
+const ComponentConfig = require('../../../../lib/bundler/component-config');
 
 const Install = require('../../../../lib/bundler/bundle/component/install').Install;
 const configs = require('../../../configs');
 
-const config = configs.components.contact.config;
-const projectDeps = require('./helper');
+const installConfig = configs.components.contact.config;
 
 describe('bundle', () => {
   describe('Component - uninstall', () => {
-    const component = new ComponentConfig(name);
-    const install = new Install(component);
+    const componentConfig = new ComponentConfig(installConfig);
+    const install = new Install(componentConfig);
 
     describe('constructor', () => {
       it('should set component', () => {
-          expect(install.component).to.equal(component);
+          expect(install.component).to.equal(componentConfig);
       });
     });
   });
