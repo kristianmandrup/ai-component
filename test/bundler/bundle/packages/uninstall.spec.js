@@ -43,9 +43,7 @@ describe('bundle', () => {
 
         it('should remove all component dependencies from project dependencies', () => {
             const installed = uninstall.run();
-            deps = projectDeps();
-            log(deps);
-            
+            deps = projectDeps();            
             expect(deps.bootstrap).to.equal(undefined);
             expect(deps.jquery).to.equal(undefined);
         });    

@@ -39,10 +39,6 @@ describe('bundle', () => {
     describe('install', () => {
         const installed = install.run();
         const deps = projectDeps();
-
-        // console.log('updated project package', mockedPack);
-        // log(project.package);
-
         it('should merge component package dependencies with project dependencies', () => {
             expect(deps.bootstrap).to.equal("^3.3.7");
         });    
