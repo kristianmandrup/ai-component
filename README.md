@@ -1,5 +1,7 @@
 # Ai-component [![Build Status](https://secure.travis-ci.org/kristianmandrup/ai-component.png?branch=master)](http://travis-ci.org/kristianmandrup/ai-component) [![NPM version](https://badge-me.herokuapp.com/api/npm/ai-component.png)](http://badges.enytc.com/for/npm/ai-component)
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/kristianmandrup/ai-component.svg)](https://greenkeeper.io/)
+
 
 > Aurelia component management 
 
